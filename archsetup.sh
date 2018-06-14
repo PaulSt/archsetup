@@ -42,7 +42,7 @@ visudo
 # uncomment wheel group: %wheel ALL=(ALL) ALL
 
 # suckless
-cd /usr/src
+cd /usr/local/src
 git clone git://git.suckless.org/st
 cd st
 wget https://st.suckless.org/patches/scrollback/st-scrollback-0.8.diff
@@ -108,6 +108,10 @@ Password = ' > ~/.calcurse/caldav/config_todo
 mkdir /usr/scripts
 echo '#!/bin/zsh
 calcurse-caldav --config ~/.calcurse/caldav/config_cal --syncdb ~/.calcurse/caldav/sync_cal.db
-calcurse-caldav --config ~/.calcurse/caldav/config_todo --syncdb ~/.calcurse/caldav/sync_todo.db' > /usr/scripts/calcurse-sync.sh
-chmod +x /usr/scripts/calcurse-sync.sh
+calcurse-caldav --config ~/.calcurse/caldav/config_todo --syncdb ~/.calcurse/caldav/sync_todo.db' > /usr/local/bin/calcurse-sync.sh
+chmod +x /usr/local/bin/calcurse-sync.sh
 cd
+
+'alias calcurse-sync='/usr/local/bin/calcurse-sync.sh'
+export VISUAL=vim
+export EDITOR="$VISUAL"' > ~/.zshrc
