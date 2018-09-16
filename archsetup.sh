@@ -1,45 +1,25 @@
-loadkeys de-latin1
-# connect to internet, use networkmanager+nmtui or wifi-menu
-# assume sda..
-dmesg | grep sda
-gdisk /dec/sda
-# o to swipe, n new +512M EF00, n new with the rest
-mkfs.vfat /dev/sda1
-mkfs.ext4 /dev/sda2
-mount /dev/sda2 /mnt
-mkdir /mnt/boot
-mount /dev/sda1 /mnt/boot
-pacstrap /mnt base base-deval vim
-mount
-arch-chroot /mnt
-bootctl install
-cd boot/loader
-vim loader.conf
-# default arch
-# timeout 4
-cd entries
-vim arch.conf
-# title Archlinux
-# linux /vmlinuz-linux
-# initrd /initramfs-linux.img
-# options root=PARTUUID=**insert number of sda2, call :r! blkid** rw
-vim /etc/vconsole.conf
-# KEYMAP=de-latin1
-vim /etc/locale.gen
-# uncomment english
+# bootloader
+pacman --noconfirm --needed -S grub && grub-install --target=i386-pc /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg
+
+# local settings
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "en_US ISO-8859-1" >> /etc/locale.gen
 locale-gen
-localectl set-keymap --no-convert **keymap** #de-latin1
+echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
+localectl set-keymap --no-convert de-latin1
 ln -sf /usr/share/zoneinfo/Europe/Vienna  /etc/localtime
 localectl set-locale LANG=en_US.UTF-8
 
+# Add new user
+read -p "User: " user
+useradd -m -G wheel -s /bin/bash $user
+passwd $user
+visudo
+sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /ect/sudoers
+
+# install basics
 pacman -Syu
 pacman -S sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation
-
-# Add new user
-useradd -m -G wheel -s /bin/bash **user**
-passwd **user**
-visudo
-# uncomment wheel group: %wheel ALL=(ALL) ALL
 
 # suckless
 cd /usr/local/src
@@ -52,15 +32,6 @@ cd ..
 git clone git://git.suckless.org/dwm
 cd dwm
 sudo make clean install
-echo 'while true; do
-  BATT=$( acpi -b | sed 's/.*[charging|unknown], \([0-9]*\)%.*/\1/gi' )
-  STATUS=$( acpi -b | sed 's/.*: \([a-zA-Z]*\),.*/\1/gi' )
-  TIME=$( date +"%R" )
-  xsetroot -name "`echo $BATT%  $TIME`"
-  sleep 60
-  done &
-  exec dwm' > ~/.xinitrc
-cd
 
 # oh my zsh
 pacman -S zsh
@@ -68,7 +39,7 @@ sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/i
 
 # python
 pacman -S python python-pip
-pip3 install httplib2 
+pip3 install httplib2
 
 # calcurse
 pacman -S asciidoc
@@ -79,39 +50,23 @@ cd calcurse
 ./configure
 make
 make install
-cd ~/.calcurse
-mkdir caldav
-echo '[General]
-Binary = calcurse
-Hostname = dav.fruux.com
-Path = 
-AuthMethod = basic
-InsecureSSL = Yes
-DryRun = No
-SyncFilter = cal
-Verbose = Yes
-[Auth]
-Username = 
-Password = ' > ~/.calcurse/caldav/config_cal
-'[General]
-Binary = calcurse
-Hostname = dav.fruux.com
-Path = 
-AuthMethod = basic
-InsecureSSL = Yes
-DryRun = No
-SyncFilter = todo
-Verbose = Yes
-[Auth]
-Username = 
-Password = ' > ~/.calcurse/caldav/config_todo
 mkdir /usr/scripts
-echo '#!/bin/zsh
-calcurse-caldav --config ~/.calcurse/caldav/config_cal --syncdb ~/.calcurse/caldav/sync_cal.db
-calcurse-caldav --config ~/.calcurse/caldav/config_todo --syncdb ~/.calcurse/caldav/sync_todo.db' > /usr/local/bin/calcurse-sync.sh
+echo '#!/bin/sh
+CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config /home/paul/.calcurse/caldav/config_cal --syncdb /home/paul/.calcurse/caldav/sync_cal.db
+CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config /home/paul/.calcurse/caldav/config_todo --syncdb /home/paul/.calcurse/caldav/sync_todo.db
+exec calcurse' > /usr/local/bin/calcurse-sync.sh
 chmod +x /usr/local/bin/calcurse-sync.sh
 cd
 
-'alias calcurse-sync='/usr/local/bin/calcurse-sync.sh'
-export VISUAL=vim
-export EDITOR="$VISUAL"' > ~/.zshrc
+# get dotfiles
+git clone https://github.com/kobus-v-schoor/dotgit
+mkdir -p ~/.bin
+cp -r dotgit/bin/dotgit* ~/.bin
+cat dotgit/bin/bash_completion >> ~/.bash_completion
+rm -rf dotgit
+echo 'export PATH="$PATH:$HOME/.bin"' >> ~/.bashrc
+git clone https://github.com/PaulSt/dots
+
+# git pass
+pacman -S gnupg pass
+git clone https://github.com/PaulSt/pass.git
