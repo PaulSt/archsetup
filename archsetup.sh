@@ -21,7 +21,8 @@ pacman -Syu
 pacman -S sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation
 
 # suckless
-cd /usr/local/src
+mkdir /home/$user/src
+cd /home/$user/src
 git clone git://git.suckless.org/st
 cd st
 wget https://st.suckless.org/patches/scrollback/st-scrollback-0.8.diff
@@ -30,7 +31,8 @@ sudo make clean install
 cd ..
 git clone git://git.suckless.org/dwm
 cd dwm
-sudo make clean install
+make clean install
+cd
 
 # oh my zsh
 pacman -S zsh
