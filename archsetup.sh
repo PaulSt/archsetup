@@ -14,7 +14,6 @@ localectl set-locale LANG=en_US.UTF-8
 read -p "User: " user
 useradd -m -G wheel -s /bin/bash $user
 passwd $user
-visudo
 sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /ect/sudoers
 
 # install basics
