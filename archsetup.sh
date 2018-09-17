@@ -10,6 +10,8 @@ ln -sf /usr/share/zoneinfo/Europe/Vienna  /etc/localtime
 #localectl set-keymap --no-convert de-latin1
 #localectl set-locale LANG=en_US.UTF-8
 
+# set root pw
+passwd
 # Add new user
 read -p "User: " user
 useradd -m -G wheel -s /bin/bash $user
