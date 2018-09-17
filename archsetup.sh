@@ -36,10 +36,6 @@ cd dwm
 make clean install
 cd
 
-# oh my zsh
-pacman -S --noconfirm --needed zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
 # python
 pacman -S --noconfirm --needed python python-pip
 pip3 install httplib2
@@ -73,3 +69,7 @@ git clone https://github.com/PaulSt/dots
 # git pass
 pacman -S --noconfirm --needed gnupg pass
 git clone https://github.com/PaulSt/pass.git
+
+# oh my zsh
+pacman -S --noconfirm --needed zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
