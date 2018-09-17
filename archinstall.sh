@@ -43,7 +43,6 @@ mount /dev/sda4 /mnt/home
 pacstrap /mnt base base-devel
 
 genfstab -U /mnt >> /mnt/etc/fstab
-cat tz.tmp > /mnt/tzfinal.tmp
-rm tz.tmp
 mv comp /mnt/etc/hostname
-curl https://www.github.com/PaulSt/archsetup/archsetup.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
+
+curl https://raw.githubusercontent.com/PaulSt/archsetup/master/archsetup.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
