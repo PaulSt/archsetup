@@ -10,33 +10,31 @@ ln -sf /usr/share/zoneinfo/Europe/Vienna  /etc/localtime
 #localectl set-keymap --no-convert de-latin1
 #localectl set-locale LANG=en_US.UTF-8
 
-# set root pw
-passwd
 # Add new user
 read -p "User: " user
 useradd -m -G wheel -s /bin/bash $user
-passwd $user
 sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /ect/sudoers
+
+# folder structure
+mkdir /home/$user/src
+mkdir /home/$user/bin
 
 # install basics
 pacman -Syu
-pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation
+pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit
 
-# zsh & oh my zsh 
+# zsh & oh my zsh
 pacman -S --noconfirm --needed zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 
 # suckless
-mkdir /home/$user/src
-cd /home/$user/src
-git clone git://git.suckless.org/st
-cd st
+git clone git://git.suckless.org/st /home/$user/src/st
+git clone git://git.suckless.org/dwm /home/$user/src/dwm
+cd /home/$user/src/st
 wget https://st.suckless.org/patches/scrollback/st-scrollback-0.8.diff
 git apply st-scrollback-0.8.diff
-sudo make clean install
-cd ..
-git clone git://git.suckless.org/dwm
-cd dwm
+make clean install
+cd ../dwm
 make clean install
 cd
 
@@ -46,31 +44,31 @@ pip3 install httplib2
 
 # calcurse
 pacman -S --noconfirm --needed asciidoc
-cd /usr/src
+cd /home/$user/src
 git clone git://git.calcurse.org/calcurse.git
 cd calcurse
 ./autogen.sh
 ./configure
 make
 make install
-mkdir /usr/scripts
 echo '#!/bin/sh
-CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config /home/paul/.calcurse/caldav/config_cal --syncdb /home/paul/.calcurse/caldav/sync_cal.db
-CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config /home/paul/.calcurse/caldav/config_todo --syncdb /home/paul/.calcurse/caldav/sync_todo.db
-exec calcurse' > /usr/local/bin/calcurse-sync.sh
-chmod +x /usr/local/bin/calcurse-sync.sh
+CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config /home/$user/.calcurse/caldav/config_cal --syncdb /home/$user/.calcurse/caldav/sync_cal.db
+CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config /home/$user/.calcurse/caldav/config_todo --syncdb /home/$user/.calcurse/caldav/sync_todo.db
+exec calcurse' > /home/$user/bin/calcurse-sync.sh
+chmod +x /home/$user/bin/calcurse-sync.sh
 cd
 
 # get dotfiles
-git clone https://github.com/kobus-v-schoor/dotgit
-mkdir -p ~/.bin
-cp -r dotgit/bin/dotgit* ~/.bin
-cat dotgit/bin/bash_completion >> ~/.bash_completion
-rm -rf dotgit
-echo 'export PATH="$PATH:$HOME/.bin"' >> ~/.bashrc
-git clone https://github.com/PaulSt/dots
+git clone https://github.com/kobus-v-schoor/dotgit /home/$user/dotgit
+cp -r /home/$user/dotgit/bin/dotgit* /home/$user/bin
+rm -rf /home/$user/dotgit
+echo 'export PATH="$PATH:home/$user/bin"' >> ~/.bashrc
+git clone https://github.com/PaulSt/dots /home/$user/dots
 
 # git pass
 pacman -S --noconfirm --needed gnupg pass
-git clone https://github.com/PaulSt/pass.git
+#git clone https://github.com/PaulSt/pass.git
 
+# set pw
+passwd
+passwd $user
