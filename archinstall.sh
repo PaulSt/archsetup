@@ -43,6 +43,6 @@ mount /dev/sda4 /mnt/home
 pacstrap /mnt base base-devel
 
 genfstab -U /mnt >> /mnt/etc/fstab
-mv comp /mnt/etc/hostname
+echo "$comp" > /mnt/etc/hostname
 
 curl https://raw.githubusercontent.com/PaulSt/archsetup/master/archsetup.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
