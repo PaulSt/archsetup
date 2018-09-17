@@ -20,7 +20,7 @@ sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /ect/sudoers
 
 # install basics
 pacman -Syu
-pacman -S --no-confirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation
+pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation
 
 # suckless
 mkdir /home/$user/src
@@ -37,15 +37,15 @@ make clean install
 cd
 
 # oh my zsh
-pacman -S --no-confirm --needed zsh
+pacman -S --noconfirm --needed zsh
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 # python
-pacman -S --no-confirm --needed python python-pip
+pacman -S --noconfirm --needed python python-pip
 pip3 install httplib2
 
 # calcurse
-pacman -S --no-confirm --needed asciidoc
+pacman -S --noconfirm --needed asciidoc
 cd /usr/src
 git clone git://git.calcurse.org/calcurse.git
 cd calcurse
@@ -71,5 +71,5 @@ echo 'export PATH="$PATH:$HOME/.bin"' >> ~/.bashrc
 git clone https://github.com/PaulSt/dots
 
 # git pass
-pacman -S --no-confirm --needed gnupg pass
+pacman -S --noconfirm --needed gnupg pass
 git clone https://github.com/PaulSt/pass.git
