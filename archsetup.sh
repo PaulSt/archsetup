@@ -22,6 +22,10 @@ sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /ect/sudoers
 pacman -Syu
 pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation
 
+# zsh & oh my zsh 
+pacman -S --noconfirm --needed zsh
+git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+
 # suckless
 mkdir /home/$user/src
 cd /home/$user/src
@@ -70,6 +74,3 @@ git clone https://github.com/PaulSt/dots
 pacman -S --noconfirm --needed gnupg pass
 git clone https://github.com/PaulSt/pass.git
 
-# oh my zsh
-pacman -S --noconfirm --needed zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
