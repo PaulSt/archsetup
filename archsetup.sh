@@ -10,18 +10,20 @@ ln -sf /usr/share/zoneinfo/Europe/Vienna  /etc/localtime
 #localectl set-keymap --no-convert de-latin1
 #localectl set-locale LANG=en_US.UTF-8
 
-# Add new user
-read -p "User: " user
+# read user name
+user="$(cat username.txt)" 
+
+# install basics
+pacman -Syu
+pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit
+
+# give user permissions
 useradd -m -G wheel -s /bin/bash $user
 sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /ect/sudoers
 
 # folder structure
 mkdir /home/$user/src
 mkdir /home/$user/bin
-
-# install basics
-pacman -Syu
-pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit
 
 # zsh & oh my zsh
 pacman -S --noconfirm --needed zsh

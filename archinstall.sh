@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# get user info
 read -p "Name computer: " comp
+read -p "User: " user
 
 timedatectl set-ntp true
 
+# partition disk
 cat <<EOF | fdisk /dev/sda
 o
 n
@@ -44,5 +47,6 @@ pacstrap /mnt base base-devel
 
 genfstab -U /mnt >> /mnt/etc/fstab
 echo "$comp" > /mnt/etc/hostname
+echo "$user" > /mnt/username.txt
 
 curl https://raw.githubusercontent.com/PaulSt/archsetup/master/archsetup.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
