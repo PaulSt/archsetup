@@ -6,9 +6,9 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "en_US ISO-8859-1" >> /etc/locale.gen
 locale-gen
 echo "KEYMAP=de-latin1" >> /etc/vconsole.conf
-localectl set-keymap --no-convert de-latin1
 ln -sf /usr/share/zoneinfo/Europe/Vienna  /etc/localtime
-localectl set-locale LANG=en_US.UTF-8
+#localectl set-keymap --no-convert de-latin1
+#localectl set-locale LANG=en_US.UTF-8
 
 # Add new user
 read -p "User: " user
