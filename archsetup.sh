@@ -15,7 +15,7 @@ user="$(cat username.txt)"
 
 # install basics
 pacman -Syu
-pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot
+pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot alsa-utils
 
 # give user permissions
 useradd -m -G wheel -s /bin/bash $user
@@ -54,10 +54,10 @@ cd calcurse
 ./configure
 make
 make install
-echo '#!/bin/sh
+echo "#!/bin/sh
 CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config /home/$user/.calcurse/caldav/config_cal --syncdb /home/$user/.calcurse/caldav/sync_cal.db
 CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config /home/$user/.calcurse/caldav/config_todo --syncdb /home/$user/.calcurse/caldav/sync_todo.db
-exec calcurse' > /home/$user/bin/calcurse-sync.sh
+exec calcurse" > /home/$user/bin/calcurse-sync.sh
 chmod +x /home/$user/bin/calcurse-sync.sh
 cd
 
@@ -75,7 +75,12 @@ cd
 
 # git pass
 pacman -S --noconfirm --needed gnupg pass
-#git clone https://github.com/PaulSt/pass.git
+mkdir /home/$user/.password-store
+cd /home/$user/.password-store
+pass git init
+pass git remote add origin https://github.com/PaulSt/pass
+git pull
+cd
 
 # set pw
 passwd
