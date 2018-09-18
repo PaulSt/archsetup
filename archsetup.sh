@@ -67,6 +67,11 @@ cp -r /home/$user/dotgit/bin/dotgit* /home/$user/bin
 rm -rf /home/$user/dotgit
 echo 'export PATH="$PATH:home/$user/bin"' >> ~/.bashrc
 git clone https://github.com/PaulSt/dots /home/$user/dots
+cd /home/$user/dots/dotfiles/x
+chmod +x .xinitrc
+cd /home/$user/dots
+../bin/dotgit restore
+cd
 
 # git pass
 pacman -S --noconfirm --needed gnupg pass
