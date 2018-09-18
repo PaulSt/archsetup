@@ -80,3 +80,4 @@ pacman -S --noconfirm --needed gnupg pass
 # set pw
 passwd
 passwd $user
+chown -R $user /home/$user
