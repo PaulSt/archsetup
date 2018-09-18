@@ -15,7 +15,7 @@ user="$(cat username.txt)"
 
 # install basics
 pacman -Syu
-pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot alsa-utils
+pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot alsa-utils mutt
 
 # give user permissions
 useradd -m -G wheel -s /bin/bash $user
@@ -75,12 +75,7 @@ cd
 
 # git pass
 pacman -S --noconfirm --needed gnupg pass
-mkdir /home/$user/.password-store
-cd /home/$user/.password-store
-pass git init
-pass git remote add origin https://github.com/PaulSt/pass
-git pull
-cd
+git clone https://github.com/PaulSt/pass /home/$user/.password-store
 
 # set pw
 passwd
