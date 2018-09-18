@@ -27,7 +27,8 @@ mkdir /home/$user/bin
 
 # zsh & oh my zsh
 pacman -S --noconfirm --needed zsh
-git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+git clone https://github.com/robbyrussell/oh-my-zsh.git /home/$user/.oh-my-zsh
+usermod -s /usr/bin/zsh $user
 
 # suckless
 git clone git://git.suckless.org/st /home/$user/src/st
