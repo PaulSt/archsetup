@@ -11,11 +11,11 @@ ln -sf /usr/share/zoneinfo/Europe/Vienna  /etc/localtime
 #localectl set-locale LANG=en_US.UTF-8
 
 # read user name
-user="$(cat username.txt)" 
+user="$(cat username.txt)"
 
 # install basics
 pacman -Syu
-pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit
+pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot
 
 # give user permissions
 useradd -m -G wheel -s /bin/bash $user
