@@ -15,7 +15,7 @@ user="$(cat username.txt)"
 
 # install basics
 pacman -Syu
-pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot alsa-utils mutt ctags
+pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot alsa-utils mutt ctags xorg-backlight cowsay
 
 # give user permissions
 useradd -m -G wheel -s /bin/bash $user
