@@ -31,13 +31,14 @@ git clone https://github.com/robbyrussell/oh-my-zsh.git /home/$user/.oh-my-zsh
 usermod -s /usr/bin/zsh $user
 
 # suckless
-git clone git://git.suckless.org/st /home/$user/src/st
-git clone git://git.suckless.org/dwm /home/$user/src/dwm
+git clone https://github.com/PaulSt/st.git /home/$user/src/st
+git clone https://github.com/PaulSt/dwm.git /home/$user/src/dwm
+git clone https://github.com/PaulSt/slock.git /home/$user/src/slock
 cd /home/$user/src/st
-wget https://st.suckless.org/patches/scrollback/st-scrollback-0.8.diff
-git apply st-scrollback-0.8.diff
 make clean install
 cd ../dwm
+make clean install
+cd ../slock
 make clean install
 cd
 
