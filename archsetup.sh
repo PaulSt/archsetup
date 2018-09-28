@@ -66,7 +66,7 @@ git clone https://github.com/PaulSt/dots /home/$user/dots
 cd /home/$user/dots/dotfiles/x
 chmod +x .xinitrc
 cd /home/$user/dots
-runuser -l  $user -c '../bin/dotgit restore'
+runuser -l $user -c "cd /home/$user/dots && /home/$user/bin/dotgit restore"
 cd
 
 # ngsolve
