@@ -55,11 +55,6 @@ cd calcurse
 ./configure
 make
 make install
-echo "#!/bin/sh
-CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config ~/.calcurse/caldav/config_cal --syncdb ~/.calcurse/caldav/sync_cal.db
-CALCURSE_CALDAV_PASSWORD=$(pass show calcurse) calcurse-caldav --config ~/.calcurse/caldav/config_todo --syncdb ~/.calcurse/caldav/sync_todo.db
-exec calcurse" > /home/$user/bin/calcurse-sync.sh
-chmod +x /home/$user/bin/calcurse-sync.sh
 cd
 
 # get dotfiles
