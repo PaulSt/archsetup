@@ -71,7 +71,7 @@ runuser -l $user -c "cd /home/$user/dots && /home/$user/bin/dotgit restore"
 cd
 
 # ngsolve
-export BASEDIR=/home/$user/ngsuite
+BASEDIR=/home/$user/ngsuite
 mkdir -p $BASEDIR
 cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve-src
 cd $BASEDIR/ngsolve-src && git submodule update --init --recursive
