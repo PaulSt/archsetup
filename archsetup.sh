@@ -24,6 +24,7 @@ sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /etc/sudoers
 # folder structure
 mkdir /home/$user/src
 mkdir /home/$user/bin
+mkdir /home/$user/projects
 
 # zsh & oh my zsh
 pacman -S --noconfirm --needed zsh
@@ -80,11 +81,11 @@ cd $BASEDIR/ngsolve-build
 cmake -DCMAKE_INSTALL_PREFIX=${BASEDIR}/ngsolve-install ${BASEDIR}/ngsolve-src
 make
 make install
+cd
 
 # get projects
-mkdir /home/$user/projects && cd "$_"
-git clone https://github.com/PaulSt/archsetup.git
-git clone https://github.com/PaulSt/trefftzngs.git
+git clone https://github.com/PaulSt/archsetup.git /home/$user/projects/archsetup
+git clone https://github.com/PaulSt/trefftzngs.git /home/$user/projects/trefftzngs
 
 #git pass
 pacman -S --noconfirm --needed gnupg pass
