@@ -14,7 +14,7 @@ ln -sf /usr/share/zoneinfo/Europe/Vienna  /etc/localtime
 user="$(cat username.txt)"
 
 # install basics
-pacman -Syu
+pacman -Syu --noconfirm --needed
 pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot alsa-utils mutt ctags xorg-backlight cowsay
 
 # give user permissions
