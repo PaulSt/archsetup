@@ -19,7 +19,7 @@ pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxi
 
 # give user permissions
 useradd -m -G wheel -s /bin/bash $user
-sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /ect/sudoers
+sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /etc/sudoers
 
 # folder structure
 mkdir /home/$user/src
