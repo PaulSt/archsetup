@@ -62,16 +62,11 @@ cd
 git clone https://github.com/kobus-v-schoor/dotgit /home/$user/dotgit
 cp -r /home/$user/dotgit/bin/dotgit* /home/$user/bin
 rm -rf /home/$user/dotgit
-echo 'export PATH="$PATH:home/$user/bin"' >> ~/.bashrc
 git clone https://github.com/PaulSt/dots /home/$user/dots
-cd /home/$user/dots/dotfiles/x
-chmod +x .xinitrc
-cd /home/$user/dots
-runuser -l $user -c "cd /home/$user/dots && /home/$user/bin/dotgit restore"
 cd
 
 # ngsolve
-pacman -S --noconfirm --needed blas cmake ffmpeg glu libxmu opencascade python tk 
+pacman -S --noconfirm --needed blas cmake ffmpeg glu libxmu opencascade python tk
 export BASEDIR=/home/$user/ngsuite
 mkdir -p $BASEDIR
 cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve-src
@@ -96,3 +91,6 @@ git clone https://github.com/PaulSt/pass /home/$user/.password-store
 passwd
 passwd $user
 chown -R $user /home/$user
+
+# now that user is owner - create dotfiles
+runuser -l $user -c "cd /home/$user/dots && /home/$user/bin/dotgit restore"
