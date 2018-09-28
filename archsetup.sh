@@ -69,7 +69,24 @@ cd /home/$user/dots
 runuser -l  $user -c '../bin/dotgit restore'
 cd
 
-# git pass
+# ngsolve
+export BASEDIR=/home/$user/ngsuite
+mkdir -p $BASEDIR
+cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve-src
+cd $BASEDIR/ngsolve-src && git submodule update --init --recursive
+mkdir $BASEDIR/ngsolve-build
+mkdir $BASEDIR/ngsolve-install
+cd $BASEDIR/ngsolve-build
+cmake -DCMAKE_INSTALL_PREFIX=${BASEDIR}/ngsolve-install ${BASEDIR}/ngsolve-src
+make
+make install
+
+# get projects
+mkdir /home/$user/projects && cd "$_"
+git clone https://github.com/PaulSt/archsetup.git
+git clone https://github.com/PaulSt/trefftzngs.git
+
+#git pass
 pacman -S --noconfirm --needed gnupg pass
 git clone https://github.com/PaulSt/pass /home/$user/.password-store
 
