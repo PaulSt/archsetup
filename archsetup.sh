@@ -66,7 +66,7 @@ git clone https://github.com/PaulSt/dots /home/$user/dots
 cd
 
 # ngsolve
-pacman -S --noconfirm --needed blas cmake ffmpeg glu libxmu opencascade python tk
+pacman -S --noconfirm --needed blas cmake ffmpeg glu libxmu opencascade python tk lapack
 export BASEDIR=/home/$user/ngsuite
 mkdir -p $BASEDIR
 cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve-src
