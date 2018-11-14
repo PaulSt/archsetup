@@ -48,7 +48,18 @@ cd
 
 # python
 pacman -S --noconfirm --needed python python-pip
-pip3 install httplib2
+python_modules=(
+    python
+    python-pip
+    pytest
+    pytest-watch
+    numpy
+    pandas
+    jupyterlab
+    sklearn
+    pipenv
+)
+pip install ${python_modules[@]}
 
 # calcurse
 pacman -S --noconfirm --needed asciidoc
