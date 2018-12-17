@@ -3,6 +3,13 @@
 # get user info
 read -p "Name computer: " comp
 read -p "User: " user
+read -r -p "Do you want to install NGSolve? [Y/n] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
+then
+    echo "yes" > /mnt/ngq.txt
+else
+    echo "ok"
+fi
 
 timedatectl set-ntp true
 

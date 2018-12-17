@@ -80,18 +80,23 @@ git clone https://github.com/PaulSt/dots /home/$user/dots
 cd
 
 # ngsolve
-pacman -S --noconfirm --needed blas cmake ffmpeg glu libxmu opencascade python tk lapack
-export BASEDIR=/home/$user/ngsuite
-mkdir -p $BASEDIR
-cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve-src
-cd $BASEDIR/ngsolve-src && git submodule update --init --recursive
-mkdir $BASEDIR/ngsolve-build
-mkdir $BASEDIR/ngsolve-install
-cd $BASEDIR/ngsolve-build
-cmake -DCMAKE_INSTALL_PREFIX=${BASEDIR}/ngsolve-install ${BASEDIR}/ngsolve-src
-make
-make install
-cd
+ngq="$(cat ngq.txt)"
+rm ngq.txt
+if [[ "$ngq" =~ "yes" ]]
+then
+    pacman -S --noconfirm --needed blas cmake ffmpeg glu libxmu opencascade python tk lapack
+    export BASEDIR=/home/$user/ngsuite
+    mkdir -p $BASEDIR
+    cd $BASEDIR && git clone https://github.com/NGSolve/ngsolve.git ngsolve-src
+    cd $BASEDIR/ngsolve-src && git submodule update --init --recursive
+    mkdir $BASEDIR/ngsolve-build
+    mkdir $BASEDIR/ngsolve-install
+    cd $BASEDIR/ngsolve-build
+    cmake -DCMAKE_INSTALL_PREFIX=${BASEDIR}/ngsolve-install ${BASEDIR}/ngsolve-src
+    make
+    make install
+    cd
+fi
 
 # get projects
 git clone https://github.com/PaulSt/archsetup.git /home/$user/projects/archsetup
