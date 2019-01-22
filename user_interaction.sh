@@ -25,7 +25,24 @@ done
 read -r -p "Are you sure? [Y/n] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
 then
-    echo "bla"
+    echo "yes"
 else
-    echo "alb"
+    echo "no"
+fi
+
+
+
+read -r -p "Write answer to file? [Y/n] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
+then
+    echo "yes" > ./ngq.txt
+else
+    echo "ok"
+fi
+
+ngq="$(cat ngq.txt)"
+rm ngq.txt
+if [[ "$ngq" =~ "yes" ]]
+then
+    echo "file write ok"
 fi
