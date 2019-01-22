@@ -3,13 +3,8 @@
 # get user info
 read -p "Name computer: " comp
 read -p "User: " user
-read -r -p "Do you want to install NGSolve? [Y/n] " response
-if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
-then
-    echo "yes" > /mnt/ngq.txt
-else
-    echo "ok"
-fi
+read -r -p "Do you want to install NGSolve? [Y/n] " ngsresponse
+echo "ok"
 
 timedatectl set-ntp true
 
@@ -55,5 +50,9 @@ pacstrap /mnt base base-devel
 genfstab -U /mnt >> /mnt/etc/fstab
 echo "$comp" > /mnt/etc/hostname
 echo "$user" > /mnt/username.txt
+if [[ "$ngsresponse" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
+then
+    echo "yes" > /mnt/ngq.txt
+fi
 
 curl https://raw.githubusercontent.com/PaulSt/archsetup/master/archsetup.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
