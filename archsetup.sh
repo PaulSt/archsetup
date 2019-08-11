@@ -15,7 +15,52 @@ user="$(cat username.txt)"
 
 # install basics
 pacman -Syu --noconfirm --needed
-pacman -S --noconfirm --needed sudo git wget dmenu freetype2 libx11 libxft libxinerama libxext libxft xorg-fonts-misc ncurses wicd-gtk ttf-liberation xorg-server xorg-xrandr xorg-xev xorg-xinit feh gvim dialog zathura firefox diff-so-fancy acpi xorg-xsetroot alsa-utils mutt ctags xorg-xbacklight cowsay newsboat ttf-dejavu xf86-video-intel vim-spell-de dosfstools octave
+
+basics=(
+    sudo 
+    git 
+    wget
+    dmenu
+    freetype2
+    libx11
+    libxft
+    libxinerama
+    libxext
+    libxft
+    ncurses
+    wicd-gtk
+    ttf-liberation
+    ttf-dejavu
+    feh
+    gvim
+    dialog
+    zathura
+    firefox
+    diff-so-fancy
+    acpi
+    alsa-utils
+    mutt
+    ctags
+    cowsay
+    newsboat
+    xf86-video-intel
+    vim-spell-de
+    dosfstools
+    octave
+    zsh
+)
+pacman -S --noconfirm --needed ${basics[@]}
+
+xorg=(
+    xorg-server
+    xorg-xrandr
+    xorg-xev
+    xorg-xinit
+    xorg-fonts-misc
+    xorg-xbacklight
+    xorg-xsetroot
+)
+pacman -S --noconfirm --needed ${xorg[@]}
 
 # autostart wicd
 systemctl enable wicd
