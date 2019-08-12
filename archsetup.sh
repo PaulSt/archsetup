@@ -77,7 +77,7 @@ mkdir /home/$user/projects
 # zsh & oh my zsh
 pacman -S --noconfirm --needed zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git /home/$user/.oh-my-zsh
-usermod -s /usr/bin/zsh $user
+#usermod -s /usr/bin/zsh $user
 
 # suckless
 git clone https://github.com/PaulSt/st.git /home/$user/src/st
