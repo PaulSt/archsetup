@@ -104,7 +104,7 @@ python_modules=(
     sklearn
     pipenv
 )
-pip install ${python_modules[@]}
+pip install --user ${python_modules[@]}
 
 # calcurse
 pacman -S --noconfirm --needed asciidoc
