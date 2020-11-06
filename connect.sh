@@ -19,7 +19,10 @@
 
 #wpa_supplicant -B -i "$wldev" -c /etc/wpa_supplicant/wpa_supplicant.conf
 
-#wpa_cli 
+#wpa_cli
 
 #dhcpcd "$wldev"
 
+# autostart dhcpcd which will load wpa_supplicant 
+#systemctl enable dhcpcd.service
+#ln -s /usr/share/dhcpcd/hooks/10-wpa_supplicant /usr/lib/dhcpcd/dhcpcd-hooks/
