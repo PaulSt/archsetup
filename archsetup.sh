@@ -17,39 +17,44 @@ user="$(cat username.txt)"
 pacman -Syu --noconfirm --needed
 
 basics=(
-    sudo 
-    git 
+    sudo
+    git
     wget
     dmenu
-    freetype2
     libx11
-    libxft
-    libxinerama
-    libxext
-    libxft
-    ncurses
-    wicd-gtk
-    ttf-liberation
-    ttf-dejavu
+    #libxft
+    #libxinerama
+    #libxext
+    #libxft
+    #freetype2
+    wpa_supplicant
+    #ncurses
+    #wicd-gtk
+    #ttf-liberation
+    #ttf-dejavu
     feh
+    acpi
+    xf86-video-intel
+    alsa-utils
+    dosfstools
+    cowsay
+    #zsh
+)
+pacman -S --noconfirm --needed ${basics[@]}
+
+work=(
     gvim
-    dialog
+    ctags
+    #dialog
+    #mutt
     zathura
     firefox
     diff-so-fancy
-    acpi
-    alsa-utils
-    mutt
-    ctags
-    cowsay
     newsboat
-    xf86-video-intel
     vim-spell-de
-    dosfstools
-    octave
-    zsh
+    #octave
 )
-pacman -S --noconfirm --needed ${basics[@]}
+pacman -S --noconfirm --needed ${work[@]}
 
 xorg=(
     xorg-server
@@ -63,7 +68,7 @@ xorg=(
 pacman -S --noconfirm --needed ${xorg[@]}
 
 # autostart wicd
-systemctl enable wicd
+#systemctl enable wicd
 
 # give user permissions
 useradd -m -G wheel -s /bin/bash $user
@@ -75,8 +80,8 @@ mkdir /home/$user/bin
 mkdir /home/$user/projects
 
 # zsh & oh my zsh
-pacman -S --noconfirm --needed zsh
-git clone https://github.com/robbyrussell/oh-my-zsh.git /home/$user/.oh-my-zsh
+#pacman -S --noconfirm --needed zsh
+#git clone https://github.com/robbyrussell/oh-my-zsh.git /home/$user/.oh-my-zsh
 #usermod -s /usr/bin/zsh $user
 
 # suckless
@@ -107,15 +112,15 @@ python_modules=(
 pip install --user ${python_modules[@]}
 
 # calcurse
-pacman -S --noconfirm --needed asciidoc
-cd /home/$user/src
-git clone git://git.calcurse.org/calcurse.git
-cd calcurse
-./autogen.sh
-./configure
-make
-make install
-cd
+#pacman -S --noconfirm --needed asciidoc
+#cd /home/$user/src
+#git clone git://git.calcurse.org/calcurse.git
+#cd calcurse
+#./autogen.sh
+#./configure
+#make
+#make install
+#cd
 
 # get dotfiles
 git clone https://github.com/kobus-v-schoor/dotgit /home/$user/dotgit
@@ -145,11 +150,10 @@ fi
 
 # get projects
 git clone https://github.com/PaulSt/archsetup.git /home/$user/projects/archsetup
-git clone https://github.com/PaulSt/trefftzngs.git /home/$user/projects/trefftzngs
 
 #git pass
-pacman -S --noconfirm --needed gnupg pass
-git clone https://github.com/PaulSt/pass /home/$user/.password-store
+#pacman -S --noconfirm --needed gnupg pass
+#git clone https://github.com/PaulSt/pass /home/$user/.password-store
 
 # set pw
 passwd
