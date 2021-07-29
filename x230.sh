@@ -54,4 +54,9 @@ if [[ "$ngsresponse" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
 then
     echo "yes" > /mnt/ngq.txt
 fi
-curl https://raw.githubusercontent.com/PaulSt/archsetup/master/archsetup.sh > /mnt/chroot.sh && arch-chroot /mnt bash chroot.sh && rm /mnt/chroot.sh
+
+
+curl https://raw.githubusercontent.com/PaulSt/archsetup/master/setup.sh > /mnt/setup.sh 
+curl https://raw.githubusercontent.com/PaulSt/archsetup/master/grubbl.sh > /mnt/grubbl.sh 
+
+&& arch-chroot /mnt bash grubbl.sh && bash setup.sh
