@@ -24,4 +24,12 @@ genfstab -U /mnt >> /mnt/etc/fstab
 curl https://raw.githubusercontent.com/PaulSt/archsetup/master/systemdboot.sh > /mnt/systemdboot.sh
 curl https://raw.githubusercontent.com/PaulSt/archsetup/master/setup.sh > /mnt/setup.sh
 
-arch-chroot /mnt bash systemdboot.sh && bash setup.sh
+echo "$comp" > /mnt/etc/hostname
+echo "$user" > /mnt/username.txt
+if [[ "$ngsresponse" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
+then
+    echo "yes" > /mnt/ngq.txt
+fi
+
+arch-chroot /mnt bash systemdboot.sh 
+arch-chroot /mnt bash setup.sh
