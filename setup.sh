@@ -37,6 +37,7 @@ basics=(
     ttf-dejavu
     ttf-font-awesome
     wpa_supplicant
+    bash-completion
     #ncurses
     #wicd-gtk
     feh
