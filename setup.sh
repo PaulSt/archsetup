@@ -10,6 +10,16 @@ ln -sf /usr/share/zoneinfo/Europe/Vienna  /etc/localtime
 # read user name
 user="$(cat username.txt)"
 
+# wpa_supplicant config
+cat <<EOF>/etc/wpa_supplicant/wpa_supplicant.conf
+ctrl_interface=/run/wpa_supplicant
+update_config=1
+EOF
+# hook to dhcpcd
+ln -s /usr/share/dhcpcd/hooks/10-wpa_supplicant /usr/lib/dhcpcd/dhcpcd-hooks/
+# autostart
+systemctl enable dhcpcd
+
 # install basics
 pacman -Syu --noconfirm --needed
 
@@ -25,6 +35,7 @@ basics=(
     freetype2
     ttf-liberation
     ttf-dejavu
+    ttf-font-awesome
     wpa_supplicant
     #ncurses
     #wicd-gtk
@@ -41,14 +52,14 @@ pacman -S --noconfirm --needed ${basics[@]}
 work=(
     gvim
     ctags
-    #dialog
-    #mutt
     zathura
     firefox
     diff-so-fancy
     newsboat
     vim-spell-de
     #octave
+    #dialog
+    #mutt
 )
 pacman -S --noconfirm --needed ${work[@]}
 
@@ -85,8 +96,10 @@ git clone https://github.com/PaulSt/st.git /home/$user/src/st
 git clone https://github.com/PaulSt/dwm.git /home/$user/src/dwm
 git clone https://github.com/PaulSt/slock.git /home/$user/src/slock
 cd /home/$user/src/st
+git apply *.diff
 make clean install
 cd ../dwm
+git apply *.diff
 make clean install
 cd ../slock
 make clean install
@@ -102,8 +115,6 @@ python_modules=(
     numpy
     pandas
     jupyterlab
-    sklearn
-    pipenv
 )
 pip install --user ${python_modules[@]}
 
