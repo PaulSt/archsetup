@@ -79,7 +79,8 @@ pacman -S --noconfirm --needed ${xorg[@]}
 
 # give user permissions
 useradd -m -G wheel -s /bin/bash $user
-sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /etc/sudoers
+#sed -i "/%wheel ALL=(ALL) ALL/s/^#//g" /etc/sudoers
+echo "%wheel ALL=(ALL) NOPASSWD: ALL, /sbin/poweroff, /sbin/reboot, /sbin/shutdown" >> /etc/sudoers
 
 # folder structure
 mkdir /home/$user/src
