@@ -19,16 +19,15 @@ basics=(
     wget
     dmenu
     libx11
-    #libxft
-    #libxinerama
-    #libxext
-    #libxft
-    #freetype2
+    libxinerama
+    libxext
+    libxft
+    freetype2
+    ttf-liberation
+    ttf-dejavu
     wpa_supplicant
     #ncurses
     #wicd-gtk
-    #ttf-liberation
-    #ttf-dejavu
     feh
     acpi
     xf86-video-intel
