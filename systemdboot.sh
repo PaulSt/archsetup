@@ -1,7 +1,7 @@
 bootctl --path=/boot install
 
 
-uuid=$(blkid -s PARTUUID -o value /dev/sda2)
+uuid=$(blkid -s PARTUUID -o value /dev/nvme0n1p2)
 cat <<EOF>/boot/loader/entries/arch.conf
 title   Arch Linux
 linux   /vmlinuz-linux
