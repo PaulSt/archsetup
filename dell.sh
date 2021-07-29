@@ -18,7 +18,7 @@ mkdir /mnt/{boot,home}
 mount /dev/nvme0n1p1 /mnt/boot
 mount /dev/nvme0n1p3 /mnt/home
 
-pacstrap /mnt base base-devel linux intel-ucode dialog dhcpcd wpa_supplicant git vim
+pacstrap /mnt base base-devel linux linux-firmware intel-ucode dialog dhcpcd wpa_supplicant git vim
 genfstab -U /mnt >> /mnt/etc/fstab
 
 curl https://raw.githubusercontent.com/PaulSt/archsetup/master/systemdboot.sh > /mnt/systemdboot.sh
@@ -29,7 +29,9 @@ echo "$user" > /mnt/username.txt
 if [[ "$ngsresponse" =~ ^([yY][eE][sS]|[yY])+$|^$ ]]
 then
     echo "yes" > /mnt/ngq.txt
+else
+    echo "no" > /mnt/ngq.txt
 fi
 
-arch-chroot /mnt bash systemdboot.sh 
+arch-chroot /mnt bash systemdboot.sh
 arch-chroot /mnt bash setup.sh

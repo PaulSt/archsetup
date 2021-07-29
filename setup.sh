@@ -91,7 +91,7 @@ cd ../dwm
 make clean install
 cd ../slock
 make clean install
-cd
+cd /
 
 # python
 pacman -S --noconfirm --needed python python-pip
@@ -117,14 +117,14 @@ pip install --user ${python_modules[@]}
 #./configure
 #make
 #make install
-#cd
+#cd /
 
 # get dotfiles
 git clone https://github.com/kobus-v-schoor/dotgit /home/$user/dotgit
-cp -r /home/$user/dotgit/bin/dotgit* /home/$user/bin
+cp -r /home/$user/dotgit/old/bin/dotgit* /home/$user/bin
 rm -rf /home/$user/dotgit
 git clone https://github.com/PaulSt/dots /home/$user/dots
-cd
+cd /
 
 # ngsolve
 ngq="$(cat ngq.txt)"
@@ -142,7 +142,7 @@ then
     cmake -DCMAKE_INSTALL_PREFIX=${BASEDIR}/ngsolve-install ${BASEDIR}/ngsolve-src
     make
     make install
-    cd
+    cd /
 fi
 
 # get projects
