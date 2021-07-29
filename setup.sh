@@ -38,6 +38,7 @@ basics=(
     ttf-font-awesome
     wpa_supplicant
     bash-completion
+    iw
     #ncurses
     #wicd-gtk
     feh
@@ -58,6 +59,7 @@ work=(
     diff-so-fancy
     newsboat
     vim-spell-de
+    ctags
     #octave
     #dialog
     #mutt
