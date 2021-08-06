@@ -25,6 +25,7 @@ pacman -Syu --noconfirm --needed
 
 basics=(
     sudo
+    man-db
     git
     wget
     dmenu
@@ -39,6 +40,7 @@ basics=(
     wpa_supplicant
     bash-completion
     iw
+    gtk2
     #ncurses
     #wicd-gtk
     feh
@@ -55,11 +57,12 @@ work=(
     gvim
     ctags
     zathura
-    firefox
     diff-so-fancy
     newsboat
     vim-spell-de
-    ctags
+    cups
+    gdb
+    #firefox
     #octave
     #dialog
     #mutt
@@ -74,6 +77,7 @@ xorg=(
     xorg-fonts-misc
     xorg-xbacklight
     xorg-xsetroot
+    xclip
 )
 pacman -S --noconfirm --needed ${xorg[@]}
 
